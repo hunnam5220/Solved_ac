@@ -18,3 +18,4 @@ while 1:
                 break
 
     print(result)
+

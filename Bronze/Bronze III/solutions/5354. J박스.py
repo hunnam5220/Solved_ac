@@ -19,4 +19,5 @@ for step in range(t):
             for x in range(n_box):
                 string += '#'
             print(string)
+            
     print()

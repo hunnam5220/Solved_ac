@@ -1,14 +1,27 @@
+
 from sys import stdin
 
-w, x, y, z = map(int, stdin.readline().rstrip().split())
-w1, x1, y1, z1 = map(int, stdin.readline().rstrip().split())
+pr = [0.0] * 210
+win, tie = 0.0, 0.0
 
-e = len([j for j in range(w, x+1)]) * len([j for j in range(y, z+1)])
-g = len([j for j in range(w1, x1+1)]) * len([j for j in range(y1, z1+1)])
+for i in range(2):
+    x = list(map(int, stdin.readline().split()))
 
-if e > g:
-    print('Gunnar')
-elif e < g:
-    print('Emma')
+    sz = float(x[1] - x[0] + 1) * (x[3] - x[2] + 1)
+    for j in range(x[0], x[1] + 1):
+        for l in range(x[2], x[3] + 1):
+            if i == 1:
+                win += pr[j + l - 1] / sz
+                tie += (pr[j + l] - pr[j + l - 1]) / sz
+            else:
+                pr[j + l] += 1 / sz
+
+    if i == 0:
+        for j in range(1, len(pr)):
+            pr[j] += pr[j - 1]
+
+suma = win * 2 + tie
+if abs(suma - 1) < 1e-9:
+    print("Tie")
 else:
-    print('Tie')
+    print("Emma" if suma > 1 else "Gunnar")

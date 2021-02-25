@@ -13,6 +13,7 @@ if cn != 1:
 
         n += 1
 
+        if cn == 1:
             print(n)
             break
 else:

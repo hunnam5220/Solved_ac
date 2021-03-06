@@ -16,8 +16,6 @@ for x in range(n):
         if arr[x][y] == 'B':
             arr[x][y] = 2
 
-for x in range(n):
-    for y in range(n):
         if nr_arr[x][y] == 'R':
             nr_arr[x][y] = 1
         elif nr_arr[x][y] == 'G':

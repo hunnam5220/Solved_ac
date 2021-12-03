@@ -12,3 +12,16 @@ for _ in range(n - 1):
     nodes[b].append(a)
 
 
+def dfs(r):
+    visited[r] = 1
+    dp[r][0] = 1
+
+    for i in nodes[r]:
+        if not visited[i]:
+            dfs(i)
+            dp[r][0] += min(dp[i][0],dp[i][1])
+            dp[r][1] += dp[i][0]
+
+
+dfs(1)
+print(min(dp[1]))

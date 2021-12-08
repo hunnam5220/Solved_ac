@@ -29,7 +29,6 @@ for _ in range(int(stdin.readline())):
     n = int(stdin.readline())
     preorder = list(map(int, stdin.readline().split()))
     inorder = list(map(int, stdin.readline().split()))
-    visited = set()
 
     idx = 0
     solve(0, n - 1)

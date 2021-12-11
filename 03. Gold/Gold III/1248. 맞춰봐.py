@@ -1,54 +1,38 @@
-from sys import stdin
-
-n = int(stdin.readline())
-temp = n * (n - 1) // 2
-s = list(stdin.readline().rstrip())
-
-
-def check(arr):
-    idx = 0
-    for i in range(n):
-        data = arr[i]
-        if i == 0 and idx == 0:
-            if s[idx] == '-':
-                if arr[i] >= 0:
-                    return False
-            elif s[idx] == '0':
-                if arr[i] != 0:
-                    return False
-            elif s[idx] == '+':
-                if arr[i] <= 0:
-                    return False
-
-            idx += 1
-
-        for j in range(i + 1, n):
-            data += arr[j]
-            if s[idx] == '-':
-                if data >= 0:
-                    return False
-            elif s[idx] == '0':
-                if data != 0:
-                    return False
-            elif s[idx] == '+':
-                if data <= 0:
-                    return False
-            idx += 1
+def ck(idx):
+    hap = 0
+    for i in range(idx, -1, -1):
+        hap += result[i]
+        if hap == 0 and S[i][idx] != 0:
+            return False
+        elif hap < 0 and S[i][idx] >= 0:
+            return False
+        elif hap > 0 and S[i][idx] <= 0:
+            return False
     return True
 
+def solve(idx):
+    if idx == N:
+        return True
+    if S[idx][idx] == 0:
+        result[idx] = 0
+        return solve(idx+1)
+    for i in range(1, 11):
+        result[idx] = S[idx][idx] * i
+        if ck(idx) and solve(idx+1):
+            return True
+    return False
 
-def solve(arr):
-    if len(arr) == n:
-        if not check(arr):
-            return
-        else:
-            print(*arr)
-            exit()
+N = int(input())
+arr = list(input())
+S = [[0]*N for i in range(N)]
+for i in range(N):
+    for j in range(i, N):
+        temp = arr.pop(0)
+        if temp == '+':
+            S[i][j] = 1
+        elif temp == '-':
+            S[i][j] = -1
 
-    for i in range(-10, 11):
-        solve(arr + [i])
-
-
-for i in range(-10, 11):
-    if s[0] == '-':
-        solve([i])
+result = [0] * N
+solve(0)
+print(' '.join(map(str, result)))

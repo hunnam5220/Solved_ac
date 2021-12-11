@@ -1,3 +1,6 @@
+from sys import stdin
+
+
 def ck(idx):
     hap = 0
     for i in range(idx, -1, -1):
@@ -10,21 +13,23 @@ def ck(idx):
             return False
     return True
 
+
 def solve(idx):
     if idx == N:
         return True
     if S[idx][idx] == 0:
         result[idx] = 0
-        return solve(idx+1)
+        return solve(idx + 1)
     for i in range(1, 11):
         result[idx] = S[idx][idx] * i
-        if ck(idx) and solve(idx+1):
+        if ck(idx) and solve(idx + 1):
             return True
     return False
 
-N = int(input())
-arr = list(input())
-S = [[0]*N for i in range(N)]
+
+N = int(stdin.readline())
+arr = list(stdin.readline().rstrip())
+S = [[0] * N for i in range(N)]
 for i in range(N):
     for j in range(i, N):
         temp = arr.pop(0)

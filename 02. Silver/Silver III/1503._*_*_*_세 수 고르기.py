@@ -17,4 +17,5 @@ for i in range(1, 1001):
             if k in arr:
                 continue
             ans = min(ans, abs(n - i * j * k))
+
 print(ans)

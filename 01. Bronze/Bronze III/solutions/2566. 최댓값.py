@@ -5,13 +5,14 @@ arr = []
 for step in range(9):
     arr.append(list(map(int, stdin.readline().rstrip().split())))
 
-r, c, m = 0, 0, 0
+ans = ()
+max_val = 0
 
-for step in range(9):
-    if m < max(arr[step]):
-        r = step + 1
-        m = max(arr[step])
-        c = arr[step].index(max(arr[step])) + 1
+for i in range(9):
+    for j in range(9):
+        if arr[i][j] >= max_val:
+            max_val = arr[i][j]
+            ans = (i + 1, j + 1)
 
-print(m)
-print(r, c)
+print(max_val)
+print(*ans)
